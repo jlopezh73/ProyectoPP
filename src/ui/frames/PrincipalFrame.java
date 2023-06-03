@@ -49,6 +49,8 @@ public class PrincipalFrame extends JFrame {
         createToolsPanel();
         createShoppingPanel();
         createShoppingCart();
+        createReportsPanel();
+        createAdjustsPanel();
 
         bienvenido=new JLabel("Bienvenido "+c.getNombreCompleto());
         bienvenido.setFont(tipoTitulo2);
@@ -60,6 +62,14 @@ public class PrincipalFrame extends JFrame {
 
         add(toolsPanel, BorderLayout.WEST);
         add(shoppingPanel, BorderLayout.CENTER);
+    }
+
+    private void createAdjustsPanel() {
+        ajustsPanel = new JPanel();
+    }
+
+    private void createReportsPanel() {
+        reportsPanel = new JPanel();
     }
 
     private void createShoppingCart() {
@@ -172,6 +182,9 @@ public class PrincipalFrame extends JFrame {
                 bShopping.setIcon(new ImageIcon("res/carrito_p.png"));
                 bShopping.setBorder(null);
                 selectedOp = SHOPPING_OP;
+                PrincipalFrame.this.remove(PrincipalFrame.this.reportsPanel);
+                PrincipalFrame.this.remove(PrincipalFrame.this.ajustsPanel);
+                PrincipalFrame.this.add(PrincipalFrame.this.shoppingPanel);
             }
 
 
@@ -210,6 +223,9 @@ public class PrincipalFrame extends JFrame {
                 bReports.setIcon(new ImageIcon("res/reporte_p.png"));
                 bReports.setBorder(null);
                 selectedOp = REPORTS_OP;
+                PrincipalFrame.this.remove(PrincipalFrame.this.shoppingPanel);
+                PrincipalFrame.this.remove(PrincipalFrame.this.ajustsPanel);
+                PrincipalFrame.this.add(PrincipalFrame.this.reportsPanel);
             }
 
             @Override
@@ -247,6 +263,9 @@ public class PrincipalFrame extends JFrame {
                 bAdjusts.setIcon(new ImageIcon("res/ajuste_p.png"));
                 bAdjusts.setBorder(null);
                 selectedOp = ADJUSTS_OP;
+                PrincipalFrame.this.remove(PrincipalFrame.this.shoppingPanel);
+                PrincipalFrame.this.remove(PrincipalFrame.this.reportsPanel);
+                PrincipalFrame.this.add(PrincipalFrame.this.ajustsPanel);
             }
 
             @Override
