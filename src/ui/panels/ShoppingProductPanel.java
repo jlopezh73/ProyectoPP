@@ -17,7 +17,7 @@ public class ShoppingProductPanel extends JPanel {
         String prod=f.getNombre();
         String photoPath="";
         this.pf = pf;
-        ImageIcon imageIcon = new ImageIcon("res/"+photoPath+"/"+prod+".jpg");
+        ImageIcon imageIcon = new ImageIcon("res/"+"fotos/"+f.getID()+".jpg");
         Image image = imageIcon.getImage();
         double ancho = image.getWidth(null);
         double alto = image.getHeight(null);

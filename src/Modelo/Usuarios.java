@@ -12,7 +12,7 @@ public class Usuarios {
             BufferedReader saca=new BufferedReader(sac);
             while(saca.readLine()!=null){
                 numUsuarios++;
-                
+
             }
         }
         catch(Exception e){
