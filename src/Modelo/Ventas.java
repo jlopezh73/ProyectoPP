@@ -12,9 +12,9 @@ import java.util.StringTokenizer;
 
 public class Ventas {
     private int numVenta;
-    File arc1=new File("C:\\Users\\jlope\\Downloads\\inventario.csv");
-    File arc2=new File("C:\\Users\\jlope\\Downloads\\ventas.csv");
-    File arc3=new File("C:\\Users\\jlope\\Downloads\\ventasProducto.csv");
+    File arc1=new File("res/inventario.csv");
+    File arc2=new File("res/ventas.csv");
+    File arc3=new File("res/ventasProducto.csv");
     public Ventas(){
         numVenta=0;
         try{

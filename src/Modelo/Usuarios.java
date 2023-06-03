@@ -3,7 +3,7 @@ import java.io.*;
 import java.util.StringTokenizer;
 
 public class Usuarios {
-    File archivo=new File("C:\\Users\\jlope\\Downloads\\usuarios.csv");
+    File archivo=new File("res/usuarios.csv");
     private int numUsuarios;
     public Usuarios(){
         numUsuarios=0;

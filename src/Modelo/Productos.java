@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class Productos {
-    File archivo=new File("C:\\Users\\jlope\\Downloads\\inventario.csv");
+    File archivo=new File("res/inventario.csv");
     private int numProductos;
     public Productos(){
         try{
