@@ -5,15 +5,16 @@ import ui.components.PHTextField;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.time.LocalDateTime;
+import java.util.List;
 
 public class VentaFrame extends JFrame {
     private JLabel namelbl;
-    private JLabel dresslbl;
+    private JLabel addresslbl;
     private JLabel estadolbl;
     private JLabel ciudadlbl;
     private PHTextField nametct;
-    private  PHTextField dresstxt;
+    private  PHTextField addresstxt;
     private JComboBox estadotxt;
     private PHTextField ciudadtxt;
     private PHTextField CPtxt;
@@ -31,10 +32,14 @@ public class VentaFrame extends JFrame {
     private Font tipoLetra=new Font("Arial",Font.BOLD,20);
     private Font tipoLetra2=new Font("Arial",Font.PLAIN,15);
     private Color colorGrisClaro = new Color(235,235, 235);
-    public VentaFrame(ArrayList<ProductoCarrito> lista,PrincipalFrame pf){
-        initComponents(lista,pf);
+    private List<ProductoCarrito> productos;
+    private PrincipalFrame pf;
+    public VentaFrame(List<ProductoCarrito> productos,PrincipalFrame pf){
+        this.productos = productos;
+        this.pf = pf;
+        initComponents();
     }
-    public void initComponents(ArrayList<ProductoCarrito> lista,PrincipalFrame pf){
+    public void initComponents(){
 
         GridBagLayout grid=new GridBagLayout();
         GridBagConstraints bc;
@@ -86,11 +91,11 @@ public class VentaFrame extends JFrame {
         bc.gridheight = 1;
         bc.weightx = 1;
 
-        dresslbl=new JLabel("Domicilio: ");
-        dresslbl.setHorizontalAlignment(SwingConstants.RIGHT);
-        dresslbl.setPreferredSize(new Dimension(150,30));
-        dresslbl.setFont(tipoLetra);
-        add(dresslbl, bc);
+        addresslbl =new JLabel("Domicilio: ");
+        addresslbl.setHorizontalAlignment(SwingConstants.RIGHT);
+        addresslbl.setPreferredSize(new Dimension(150,30));
+        addresslbl.setFont(tipoLetra);
+        add(addresslbl, bc);
 
         bc = new GridBagConstraints();
         bc.gridx = 1;
@@ -101,12 +106,12 @@ public class VentaFrame extends JFrame {
         bc.insets = new Insets(10,10,10,10);
         bc.fill = GridBagConstraints.HORIZONTAL;
 
-        dresstxt=new PHTextField();
-        dresstxt.setPlaceholder("Domicilio");
-        dresstxt.setPreferredSize(new Dimension(200,30));
-        dresstxt.setFont(tipoLetra2);
-        dresstxt.setBackground(colorGrisClaro);
-        add(dresstxt, bc);
+        addresstxt =new PHTextField();
+        addresstxt.setPlaceholder("Domicilio");
+        addresstxt.setPreferredSize(new Dimension(200,30));
+        addresstxt.setFont(tipoLetra2);
+        addresstxt.setBackground(colorGrisClaro);
+        add(addresstxt, bc);
 
         bc = new GridBagConstraints();
         bc.gridx = 0;
@@ -293,7 +298,7 @@ public class VentaFrame extends JFrame {
         bc.fill = GridBagConstraints.HORIZONTAL;
 
         cancelar=new JButton("Cancelar");
-        cancelar.setPreferredSize(new Dimension(80,20));
+        cancelar.setPreferredSize(new Dimension(80,30));
         cancelar.setFont(tipoLetra);
         cancelar.setForeground(Color.WHITE);
         cancelar.setBackground(new Color(140,10,10));
@@ -310,7 +315,7 @@ public class VentaFrame extends JFrame {
 
         pagar=new JButton("Pagar");
         pagar.setFont(tipoLetra);
-        pagar.setPreferredSize(new Dimension(110,20));
+        pagar.setPreferredSize(new Dimension(110,30));
         pagar.setForeground(Color.white);
         pagar.setBackground(new Color(10,100,10));
         add(pagar, bc);
@@ -318,17 +323,28 @@ public class VentaFrame extends JFrame {
         cancelar.addActionListener(evt->{
             coloniatxt.setText("");
             nametct.setText("");
-            dresstxt.setText("");
+            addresstxt.setText("");
             CPtxt.setText("");
             ciudadtxt.setText("");
             this.setVisible(false);
         });
+
         pagar.addActionListener(evt->{
             if (validarDatos()) {
+                Venta venta = new Venta(0,
+                        nametct.getTextPH(),
+                        addresstxt.getTextPH(),
+                        coloniatxt.getTextPH(),
+                        CPtxt.getTextPH(),
+                        ciudadtxt.getTextPH(),
+                        (String) estadotxt.getSelectedItem(),
+                        correotxt.getTextPH(),
+                        telefonotxt.getTextPH(),
+                        LocalDateTime.now(),
+                        productos);
                 Ventas vs = new Ventas();
-
-                vs.registrarVenta(lista);
-                TicketFrame ticket = new TicketFrame(vs);
+                vs.registrarVenta(venta);
+                TicketFrame ticket = new TicketFrame(venta);
                 ticket.show();
 
                 pf.pagado();
@@ -341,7 +357,7 @@ public class VentaFrame extends JFrame {
         boolean errors = false;
         String messages = "";
         String name = nametct.getTextPH();
-        String address = dresstxt.getTextPH();
+        String address = addresstxt.getTextPH();
         String state = estadotxt.getSelectedItem().toString();
         String city =  ciudadtxt.getTextPH();
         String cp = CPtxt.getTextPH();

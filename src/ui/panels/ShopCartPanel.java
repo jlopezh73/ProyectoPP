@@ -3,6 +3,7 @@ package ui.panels;
 import Modelo.Producto;
 import Modelo.ProductoCarrito;
 import Modelo.Productos;
+import Modelo.Venta;
 import ui.frames.PrincipalFrame;
 import ui.frames.VentaFrame;
 
