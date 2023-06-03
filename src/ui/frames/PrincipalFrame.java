@@ -5,6 +5,7 @@ import Modelo.Producto;
 import Modelo.ProductoCarrito;
 import Modelo.Productos;
 import Modelo.Usuario;
+import ui.panels.AdjustPanel;
 import ui.panels.ShopCartPanel;
 import ui.panels.ShoppingDepartmentPanel;
 
@@ -30,6 +31,9 @@ public class PrincipalFrame extends JFrame {
     private JButton bAdjusts;
     private JTabbedPane departmentTabs;
     private int selectedOp=SHOPPING_OP;
+
+    private JButton salesReportButton;
+    private JButton inventoryReportButton;
 
     private Color colorAmarillo = new Color(255,212,1);
     private Font tipoTitulo1 = new Font("Arial", Font.BOLD,40);
@@ -65,11 +69,41 @@ public class PrincipalFrame extends JFrame {
     }
 
     private void createAdjustsPanel() {
-        ajustsPanel = new JPanel();
+        ajustsPanel = new AdjustPanel();
     }
 
     private void createReportsPanel() {
         reportsPanel = new JPanel();
+        reportsPanel.setLayout(null);
+        reportsPanel.setMaximumSize(new Dimension(300,300));
+        salesReportButton = new JButton("Reporte de Ventas");
+        salesReportButton.setBounds(200,200,250,250);
+        salesReportButton.setBackground(colorAmarillo);
+        salesReportButton.setOpaque(true);
+        salesReportButton.setIcon(new ImageIcon("res/reporte2.png"));
+        salesReportButton.setFont(tipoTitulo2);
+        salesReportButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+        salesReportButton.setHorizontalTextPosition(SwingConstants.CENTER);
+        salesReportButton.setBorderPainted(false);
+        salesReportButton.addActionListener(evt ->  {
+
+        });
+
+        inventoryReportButton = new JButton("Reporte de Inventarios");
+        inventoryReportButton.setBounds(600,200,250,250);
+        inventoryReportButton.setBackground(colorAmarillo);
+        inventoryReportButton.setOpaque(true);
+        inventoryReportButton.setIcon(new ImageIcon("res/reporte2.png"));
+        inventoryReportButton.setFont(tipoTitulo2);
+        inventoryReportButton.setVerticalTextPosition(SwingConstants.BOTTOM);
+        inventoryReportButton.setHorizontalTextPosition(SwingConstants.CENTER);
+        inventoryReportButton.setBorderPainted(false);
+        inventoryReportButton.addActionListener(evt ->  {
+
+        });
+
+        reportsPanel.add(salesReportButton);
+        reportsPanel.add(inventoryReportButton);
     }
 
     private void createShoppingCart() {
@@ -175,6 +209,8 @@ public class PrincipalFrame extends JFrame {
         bShopping = new JButton();
         bShopping.setIcon(new ImageIcon("res/carrito_p.png"));
         bShopping.setBorder(null);
+        bShopping.setToolTipText("Selección y compra de productos");
+
         bShopping.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -185,6 +221,9 @@ public class PrincipalFrame extends JFrame {
                 PrincipalFrame.this.remove(PrincipalFrame.this.reportsPanel);
                 PrincipalFrame.this.remove(PrincipalFrame.this.ajustsPanel);
                 PrincipalFrame.this.add(PrincipalFrame.this.shoppingPanel);
+                PrincipalFrame.this.reportsPanel.updateUI();
+                PrincipalFrame.this.ajustsPanel.updateUI();
+                PrincipalFrame.this.shoppingPanel.updateUI();
             }
 
 
@@ -216,6 +255,7 @@ public class PrincipalFrame extends JFrame {
         bReports.setBorderPainted(false);
         bReports.setOpaque(true);
         bReports.setBorder(null);
+        bReports.setToolTipText("Generación de reportes");
         bReports.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -226,6 +266,9 @@ public class PrincipalFrame extends JFrame {
                 PrincipalFrame.this.remove(PrincipalFrame.this.shoppingPanel);
                 PrincipalFrame.this.remove(PrincipalFrame.this.ajustsPanel);
                 PrincipalFrame.this.add(PrincipalFrame.this.reportsPanel);
+                PrincipalFrame.this.reportsPanel.updateUI();
+                PrincipalFrame.this.ajustsPanel.updateUI();
+                PrincipalFrame.this.shoppingPanel.updateUI();
             }
 
             @Override
@@ -256,6 +299,7 @@ public class PrincipalFrame extends JFrame {
         bAdjusts.setBorderPainted(false);
         bAdjusts.setOpaque(true);
         bAdjusts.setBorder(null);
+        bAdjusts.setToolTipText("Edición y modificación de productos y usuarios");
         bAdjusts.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -266,6 +310,10 @@ public class PrincipalFrame extends JFrame {
                 PrincipalFrame.this.remove(PrincipalFrame.this.shoppingPanel);
                 PrincipalFrame.this.remove(PrincipalFrame.this.reportsPanel);
                 PrincipalFrame.this.add(PrincipalFrame.this.ajustsPanel);
+                PrincipalFrame.this.reportsPanel.updateUI();
+                PrincipalFrame.this.ajustsPanel.updateUI();
+                PrincipalFrame.this.shoppingPanel.updateUI();
+
             }
 
             @Override
