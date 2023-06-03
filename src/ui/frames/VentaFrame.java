@@ -9,23 +9,23 @@ import java.util.ArrayList;
 
 public class VentaFrame extends JFrame {
     private JLabel namelbl;
-    private PHTextField nametct;
     private JLabel dresslbl;
-    private  PHTextField dresstxt;
     private JLabel estadolbl;
-    private JComboBox estadotxt;
     private JLabel ciudadlbl;
+    private PHTextField nametct;
+    private  PHTextField dresstxt;
+    private JComboBox estadotxt;
     private PHTextField ciudadtxt;
+    private PHTextField CPtxt;
+    private PHTextField coloniatxt;
+    private PHTextField telefonotxt;
+    private PHTextField correotxt;
     private JPanel left;
     private JPanel right;
     private JLabel CPlbl;
-    private PHTextField CPtxt;
     private JLabel colonialbl;
-    private PHTextField coloniatxt;
     private JLabel telefonolbl;
-    private PHTextField telefonotxt;
     private JLabel correolbl;
-    private PHTextField correotxt;
     private JButton pagar;
     private  JButton cancelar;
     private Font tipoLetra=new Font("Arial",Font.BOLD,20);
@@ -41,7 +41,7 @@ public class VentaFrame extends JFrame {
         setLayout(grid);
         setTitle("Datos de Venta");
 
-        setSize(850,500);
+        setSize(850,350);
         setResizable(false);
         ///setUndecorated(true);
         setLocationRelativeTo(null);
@@ -220,34 +220,68 @@ public class VentaFrame extends JFrame {
         bc.fill = GridBagConstraints.HORIZONTAL;
 
         CPtxt=new PHTextField();
-        CPtxt.setFont(tipoLetra2);
         CPtxt.setPreferredSize(new Dimension(150,30));
         CPtxt.setPlaceholder("Codigo Postal");
+        CPtxt.setFont(tipoLetra2);
         CPtxt.setBackground(colorGrisClaro);
         add(CPtxt, bc);
 
+        bc = new GridBagConstraints();
+        bc.gridx = 0;
+        bc.gridy = 4;
+        bc.gridwidth = 1;
+        bc.gridheight = 1;
+        bc.weightx = 1.0;
 
-
-        /*
-        correolbl=new JLabel("Correo electrónico");
+        correolbl=new JLabel("Correo");
         correolbl.setPreferredSize(new Dimension(100,15));
         correolbl.setFont(tipoLetra);
         add(correolbl, bc);
+
+        bc = new GridBagConstraints();
+        bc.gridx = 1;
+        bc.gridy = 4;
+        bc.gridwidth = 2;
+        bc.gridheight = 1;
+        bc.weightx = 2.0;
+        bc.insets = new Insets(10,10,10,10);
+        bc.fill = GridBagConstraints.HORIZONTAL;
+
+        correotxt=new PHTextField();
+        correotxt.setPreferredSize(new Dimension(150,30));
+        correotxt.setPlaceholder("Correo electrónico");
+        correotxt.setFont(tipoLetra2);
+        correotxt.setBackground(colorGrisClaro);
+        add(correotxt, bc);
+
+        bc = new GridBagConstraints();
+        bc.gridx = 3;
+        bc.gridy = 4;
+        bc.gridwidth = 1;
+        bc.gridheight = 1;
+        bc.weightx = 1.0;
 
         telefonolbl=new JLabel("Celular");
         telefonolbl.setPreferredSize(new Dimension(100,15));
         telefonolbl.setFont(tipoLetra);
         add(telefonolbl, bc);
 
-        correotxt=new PHTextField();
-        correotxt.setPreferredSize(new Dimension(150,18));
-        correotxt.setPlaceholder("Correo electrónico");
-        add(correotxt, bc);
+        bc = new GridBagConstraints();
+        bc.gridx = 4;
+        bc.gridy = 4;
+        bc.gridwidth = 2;
+        bc.gridheight = 1;
+        bc.weightx = 2.0;
+        bc.insets = new Insets(10,10,10,10);
+        bc.fill = GridBagConstraints.HORIZONTAL;
+
 
         telefonotxt=new PHTextField();
         telefonotxt.setPlaceholder("Celular");
-        telefonotxt.setPreferredSize(new Dimension(150,18));
-        add(telefonotxt, bc);*/
+        telefonotxt.setPreferredSize(new Dimension(150,30));
+        telefonotxt.setFont(tipoLetra2);
+        telefonotxt.setBackground(colorGrisClaro);
+        add(telefonotxt, bc);
 
         bc = new GridBagConstraints();
         bc.gridx = 0;
@@ -290,12 +324,52 @@ public class VentaFrame extends JFrame {
             this.setVisible(false);
         });
         pagar.addActionListener(evt->{
+            if (validarDatos()) {
+                Ventas vs = new Ventas();
 
-                Ventas vs=new Ventas();
                 vs.registrarVenta(lista);
-            pf.pagado();
-            this.setVisible(false);
+                TicketFrame ticket = new TicketFrame(vs);
+                ticket.show();
+
+                pf.pagado();
+                this.setVisible(false);
+            }
         });
+    }
+
+    private boolean validarDatos() {
+        boolean errors = false;
+        String messages = "";
+        String name = nametct.getTextPH();
+        String address = dresstxt.getTextPH();
+        String state = estadotxt.getSelectedItem().toString();
+        String city =  ciudadtxt.getTextPH();
+        String cp = CPtxt.getTextPH();
+        String colony =  coloniatxt.getTextPH();
+        String phone = telefonotxt.getTextPH();
+        String email =  correotxt.getTextPH();
+
+        if (name.trim().length() == 0)
+            messages += "* El nombre del cliente no puede estar vacío\n";
+        if (address.trim().length() == 0)
+            messages += "* El domicilio del cliente no puede estar vacío\n";
+        if (state.trim().length() == 0)
+            messages += "* El estado del domicilio del cliente no puede estar vacío\n";
+        if (city.trim().length() == 0)
+            messages += "* La ciudad del domicilio del cliente no puede estar vacío\n";
+        if (colony.trim().length() == 0)
+            messages += "* La colonia del domicilio del cliente no puede estar vacío\n";
+        if (cp.trim().length() == 0)
+            messages += "* El código postal del domicilio del cliente no puede estar vacío\n";
+        if (phone.trim().length() == 0)
+            messages += "* El teléfono del cliente no puede estar vacío\n";
+        if (email.trim().length() == 0)
+            messages += "* El correo electrónico del cliente no puede estar vacío\n";
+        errors = messages.length() > 0;
+        if (errors) {
+            JOptionPane.showMessageDialog(null, messages, "Error en la onformación", JOptionPane.ERROR_MESSAGE);
+        }
+        return !errors;
     }
 
 }

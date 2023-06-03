@@ -41,11 +41,9 @@ public class Ventas {
     public int getNumVenta() {
         return numVenta;
     }
-
     public void setNumVenta(int numVenta) {
         this.numVenta = numVenta;
     }
-
     public void registrarVenta( ArrayList<ProductoCarrito> lista){
         try{
             FileWriter met=new FileWriter(arc2,true);

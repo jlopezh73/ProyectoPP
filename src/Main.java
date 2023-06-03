@@ -17,9 +17,9 @@ public class Main {
         } catch (Exception e) {
 
         }
-        LoginFrame loginFrame = new LoginFrame();
-        loginFrame.setVisible(true);
-        /*VentaFrame vf = new VentaFrame(new ArrayList<ProductoCarrito>());
-        vf.show();*/
+        //LoginFrame loginFrame = new LoginFrame();
+        //loginFrame.setVisible(true);
+        VentaFrame vf = new VentaFrame(new ArrayList<ProductoCarrito>(), null);
+        vf.show();
     }
 }

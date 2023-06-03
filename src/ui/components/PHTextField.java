@@ -108,4 +108,11 @@ public class PHTextField extends JTextField {
         setTextWrittenIn(false);
     }
 
+    public String getTextPH() {
+        if (!isTextWrittenIn())
+            return "";
+        else
+            return getText();
+    }
+
 }
