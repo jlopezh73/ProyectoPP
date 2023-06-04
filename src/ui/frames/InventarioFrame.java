@@ -53,8 +53,8 @@ public class InventarioFrame extends JFrame {
 
         add(departamentos);
 
-        etiqueta2=new JLabel("Apartado");
-        etiqueta2.setPreferredSize(new Dimension(150,30));
+        etiqueta2=new JLabel("Apartado:");
+        etiqueta2.setPreferredSize(new Dimension(100,30));
         etiqueta2.setFont(tipoTitulo2);
         add(etiqueta2);
         add(apartados);
