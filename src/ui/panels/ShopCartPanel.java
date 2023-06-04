@@ -53,7 +53,7 @@ public class ShopCartPanel extends JPanel {
         productos.setBackground(Color.white);
         scroll=new JScrollPane(productos);
         scroll.setBorder(null);
-        scroll.setPreferredSize(new Dimension(280,700));
+        scroll.setPreferredSize(new Dimension(300,600));
         scroll.setBackground(Color.WHITE);
         add(scroll);
 
@@ -120,7 +120,7 @@ public class ShopCartPanel extends JPanel {
 
         }
         productos.removeAll();
-        productos.setPreferredSize(new Dimension(280, lista.size()*150));
+        productos.setPreferredSize(new Dimension(280, lista.size()*300));
         for(ProductoCarrito n:lista){
             ShoppingCartProductPanel m=new ShoppingCartProductPanel(n,pf);
             productos.add(m);

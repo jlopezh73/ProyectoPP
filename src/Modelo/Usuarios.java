@@ -73,6 +73,7 @@ public class Usuarios {
             FileReader met=new FileReader(archivo);
             BufferedReader mete=new BufferedReader(met);
             boolean bandera = false;
+            int num=0;
             for (int i = 0; i < numUsuarios; i++) {
                 String k=mete.readLine();
                 StringTokenizer f=new StringTokenizer(k,",");
@@ -84,6 +85,7 @@ public class Usuarios {
                 if (u.getNombre().equals(o.getNombre())) {
                     bandera = true;
                 }
+                num++;
             }
             mete.close();
             if (bandera == false) {
@@ -96,7 +98,8 @@ public class Usuarios {
                     saca.write(",");
                     saca.write(u.getNombreCompleto());
                     saca.write(",");
-                    saca.write(u.getID());
+                    String auxi=num+"";
+                    saca.write(auxi);
                     saca.write("\n");
                     numUsuarios++;
                     saca.close();

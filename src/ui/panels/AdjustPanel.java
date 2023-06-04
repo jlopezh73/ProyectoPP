@@ -1,8 +1,6 @@
 package ui.panels;
 
-import Modelo.Producto;
-import Modelo.ProductoCarrito;
-import Modelo.Productos;
+import Modelo.*;
 import ui.components.PHTextField;
 
 import javax.swing.*;
@@ -318,19 +316,16 @@ public class AdjustPanel extends JPanel {
         String[] columnNames = {"Usuario",
                 "Nombre Completo",
                 "Contraseña"};
-
-        Object[][] data = {
-                {"Kathy", "Smith",
-                        "Snowboarding", new Integer(5), new Boolean(false)},
-                {"John", "Doe",
-                        "Rowing", new Integer(3), new Boolean(true)},
-                {"Sue", "Black",
-                        "Knitting", new Integer(2), new Boolean(false)},
-                {"Jane", "White",
-                        "Speed reading", new Integer(20), new Boolean(true)},
-                {"Joe", "Brown",
-                        "Pool", new Integer(10), new Boolean(false)}
-        };
+        Usuarios usu=new Usuarios();
+        ArrayList < Usuario> lista=usu.todosUsuarios();
+        Object[][] data=new Object[lista.size()][3];
+        int j=0;
+        for(Usuario t:lista){
+            data[j][0]=t.getNombre();
+            data[j][1]=t.getNombreCompleto();
+            data[j][2]=t.getContraseña();
+            j++;
+        }
 
         usersPanel = new JPanel();
         usersPanel.setBackground(Color.white);

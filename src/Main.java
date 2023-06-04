@@ -20,10 +20,10 @@ public class Main {
 
         }
 
-        PrincipalFrame pf = new PrincipalFrame(new Usuario("","","Juan Luis López Herrera",""));
-        pf.show();
-        //LoginFrame loginFrame = new LoginFrame();
-        //loginFrame.setVisible(true);
+        //PrincipalFrame pf = new PrincipalFrame(new Usuario("","","Juan Luis López Herrera",""));
+        //pf.show();
+        LoginFrame loginFrame = new LoginFrame();
+        loginFrame.setVisible(true);
         /*Productos productos = new Productos();
         List<ProductoCarrito> prods = new ArrayList<ProductoCarrito>();
         prods.add(new ProductoCarrito(new Producto("1","Cartulina",0,10.0,"",""), 3));
