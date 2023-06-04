@@ -32,11 +32,13 @@ public class AdjustPanel extends JPanel {
     private JPanel buttonsPanel2;
     private Productos prods;
     private List<Producto> listaProds;
-    private PHTextField txtName;
+    private JTextField txtName;
     private JComboBox cbDepartment;
     private JComboBox cbApartment;
     private JSpinner spPrice;
     private JSpinner spQuantity;
+
+    private JPanel tablePanel1;
 
     public AdjustPanel() {
         initComponents();
@@ -119,9 +121,10 @@ public class AdjustPanel extends JPanel {
         tableProducts.setCellEditor(null);
         tableProducts.setEditingColumn(2);
 
-
-
-        productsPanel.add(new JScrollPane(tableProducts), BorderLayout.CENTER);
+        tablePanel1 = new JPanel();
+        tablePanel1.setLayout(new BorderLayout());
+        tablePanel1.add(new JScrollPane(tableProducts), BorderLayout.CENTER);
+        productsPanel.add(tablePanel1, BorderLayout.CENTER);
 
         JButton edit = new JButton("Modificar Producto");
         edit.setBackground(Color.blue);
@@ -132,8 +135,9 @@ public class AdjustPanel extends JPanel {
         edit.addActionListener(evt -> {
             int i = tableProducts.getSelectedRow();
             if (i >= 0) {
+                tableProducts.setEnabled(false);
                 Producto prod = listaProds.get(i);
-                loadProduct();
+                loadProduct(prod);
 
                 productsPanel.remove(buttonsPanel1);
                 buttonsPanel1.updateUI();
@@ -158,7 +162,7 @@ public class AdjustPanel extends JPanel {
         editProductPanel = new JPanel();
         editProductPanel.setLayout(new FlowLayout());
         editProductPanel.setBorder(BorderFactory.createTitledBorder("Edición de Producto"));
-        editProductPanel.setPreferredSize(new Dimension(1050,200));
+        editProductPanel.setPreferredSize(new Dimension(1050,170));
         editProductPanel.setBackground(colorAmarillo);
 
         JLabel lblName = new JLabel("Nombre");
@@ -184,18 +188,29 @@ public class AdjustPanel extends JPanel {
         txtName = new PHTextField();
         txtName.setFont(tipoTitulo21);
         txtName.setPreferredSize(new Dimension(850,30));
-        txtName.setPlaceholder("Nombre del Producto");
 
         cbDepartment = new JComboBox();
         cbDepartment.setFont(tipoTitulo21);
         cbDepartment.setPreferredSize(new Dimension(350,30));
+        cbDepartment.addActionListener(evt -> {
+            String apartamntos[][]={
+                    {"Escritura","Artes","Papeles","Regalos"},
+                    {"Shampoo y jabones","desodorantes y perfumes","Cremas y faciales","Tintes y cabello"},
+                    {"Chocolates","Dulces","Dulces salados","Bebidas"}
+            };
+            cbApartment.removeAllItems();
+            String []arr = apartamntos[cbDepartment.getSelectedIndex()];
+            for (String ap: arr) {
+                cbApartment.addItem(ap);
+            }
+        });
 
         cbApartment = new JComboBox();
         cbApartment.setFont(tipoTitulo21);
         cbApartment.setPreferredSize(new Dimension(350,30));
-        cbDepartment.addItem("Papelería");
-        cbDepartment.addItem("Salud y Belleza");
-        cbDepartment.addItem("Dulcería");
+        cbDepartment.addItem("Papeleria");
+        cbDepartment.addItem("Salud y belleza");
+        cbDepartment.addItem("Dulces y bebidas");
 
         spPrice = new JSpinner();
         spPrice.setFont(tipoTitulo21);
@@ -206,7 +221,57 @@ public class AdjustPanel extends JPanel {
         spQuantity.setPreferredSize(new Dimension(350,30));
 
         JButton accept = new JButton("Aceptar");
+        accept.setBackground(Color.black);
+        accept.setForeground(Color.white);
+        accept.setOpaque(true);
+        accept.setBorderPainted(false);
+        accept.setPreferredSize(new Dimension(200, 30));
+        accept.addActionListener(evt-> {
+            int row = tableProducts.getSelectedRow();
+            tableProducts.getModel().setValueAt(txtName.getText(), row, 1);
+            tableProducts.getModel().setValueAt(cbDepartment.getSelectedItem(), row, 2);
+            tableProducts.getModel().setValueAt(cbApartment.getSelectedItem(), row, 3);
+            tableProducts.getModel().setValueAt(spPrice.getValue(), row, 4);
+            tableProducts.getModel().setValueAt(spQuantity.getValue(), row, 5);
+
+            Producto anterior = listaProds.get(row);
+            Producto nuevo = new Producto(anterior.getID(),
+                    txtName.getText(),
+                    (int) spQuantity.getValue(),
+                    (double)spPrice.getValue(),
+                    String.valueOf(cbDepartment.getSelectedIndex()+1),
+                    String.valueOf(cbApartment.getSelectedIndex()+1));
+
+            prods.modificarProducto(anterior, nuevo);
+
+            productsPanel.remove(editProductPanel);
+            buttonsPanel1.updateUI();
+            productsPanel.add(buttonsPanel1, BorderLayout.SOUTH);
+            buttonsPanel1.updateUI();
+            tablePanel1.updateUI();
+            tableProducts.setEnabled(true);
+        });
+
         JButton cancel = new JButton("Cancelar");
+        cancel.setForeground(Color.black);
+        cancel.setBackground(Color.white);
+        cancel.setOpaque(true);
+        cancel.setBorderPainted(false);
+        cancel.setPreferredSize(new Dimension(200, 30));
+        cancel.addActionListener(evt-> {
+            productsPanel.remove(editProductPanel);
+            buttonsPanel1.updateUI();
+            productsPanel.add(buttonsPanel1, BorderLayout.SOUTH);
+            buttonsPanel1.updateUI();
+            tablePanel1.updateUI();
+            tableProducts.setEnabled(true);
+        });
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout());
+        panel.setBackground(null);
+        panel.add(accept);
+        panel.add(cancel);
 
         editProductPanel.add(lblName);
         editProductPanel.add(txtName);
@@ -218,12 +283,20 @@ public class AdjustPanel extends JPanel {
         editProductPanel.add(spPrice);
         editProductPanel.add(lblQuantity);
         editProductPanel.add(spQuantity);
+        editProductPanel.add(panel);
 
 
         productsPanel.add(buttonsPanel1, BorderLayout.SOUTH);
     }
 
-    private void loadProduct() {
+    private void loadProduct(Producto prod) {
+        if (prod != null) {
+            txtName.setText(prod.getNombre());
+            cbDepartment.setSelectedItem(prod.getDepa());
+            cbApartment.setSelectedItem(prod.getApa());
+            spPrice.setValue(prod.getPrecio());
+            spQuantity.setValue(prod.getPiezas());
+        }
     }
 
     private void createUsersPanel() {
