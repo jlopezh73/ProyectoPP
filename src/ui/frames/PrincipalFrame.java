@@ -29,6 +29,7 @@ public class PrincipalFrame extends JFrame {
     private JButton bShopping;
     private JButton bReports;
     private JButton bAdjusts;
+    private JButton bExit;
     private JTabbedPane departmentTabs;
     private int selectedOp=SHOPPING_OP;
 
@@ -332,6 +333,45 @@ public class PrincipalFrame extends JFrame {
             }
         });
         toolsPanel.add(bAdjusts);
+
+        JPanel empty3 = new JPanel();
+        empty3.setBackground(null);
+        empty3.setPreferredSize(new Dimension(100,130));
+        toolsPanel.add(empty3);
+
+        bExit = new JButton();
+        bExit.setIcon(new ImageIcon("res/salir.png"));
+        bExit.setBackground(colorAmarillo);
+        bExit.setBorderPainted(false);
+        bExit.setOpaque(true);
+        bExit.setBorder(null);
+        bExit.setToolTipText("Salir de la aplicación");
+        bExit.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                cleanButtons();
+                bExit.setIcon(new ImageIcon("res/salir_p.png"));
+                bExit.setBorder(null);
+                if (JOptionPane.showConfirmDialog(null, "¿Está seguro de querer salir del sistema", "Advertencia", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    System.exit(0);
+                }
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                bExit.setIcon(new ImageIcon("res/salir_p.png"));
+                bExit.setBorder(null);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                if (selectedOp != ADJUSTS_OP) {
+                    bExit.setIcon(new ImageIcon("res/salir.png"));
+                    bExit.setBorder(null);
+                }
+            }
+        });
+        toolsPanel.add(bExit);
     }
 
     private void cleanButtons() {

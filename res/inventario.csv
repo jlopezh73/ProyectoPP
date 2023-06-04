@@ -1,49 +1,3 @@
-<<<<<<< HEAD
-1,Libreta,20,25.0,1,3
-2,Cartulina,30,10.0,1,3
-3,Lapiz,50,5.0,1,1
-4,Shampoo,10,50.0,2,1
-5,Carlos V,45,10.0,3,1
-6,Lapicero,30,9.0,1,1
-7,Libreta de aro,30,8.0,1,3
-8,Plumones,19,25.0,1,1
-9,Hojas blancas,20,15.0,1,3
-10,Lapiz de dibujo,20,25.0,1,2
-11,Correctores,49,6.0,1,1
-12,Panditas 123,100,10.0,3,3
-13,Hershhey,80,12.0,3,1
-14,Crema lubridem,30,20.0,2,3
-15,Acondicionador,10,60.0,2,3
-16,Tinte nutrisse,25,40.0,2,4
-17,Tinte coleston,5,400.0,2,4
-18,Crema para manos,15,90.0,2,3
-19,Pulparindo,40,17.0,3,2
-20,Picafresas,30,16.0,3,2
-21,milky way,30,13.0,3,2
-22,snickers,30,12.0,3,2
-23,Lunetas,25,18.0,3,1
-24,Jabon para la cara,10,80.0,2,1
-25,Jabon zote,15,30.0,2,1
-26,tinte soft,10,300.0,2,4
-27,Cerum para el cabello,10,120.0,2,4
-28,Versace,5,3500.0,2,2
-29,Sauvage,7,4000.0,2,2
-30,Desodorante Axe,20,80.0,2,2
-31,Desodorante en barra,3,3350.0,2,2
-32,Pincel,10,25.0,1,2
-33,Bloqueador solar,80,80.0,2,3
-34,Bastidor,5,60.0,1,2
-35,Brocha,10,34.0,1,1
-36,Monio,5,40.0,1,4
-37,Regalo armado,3,500.0,1,4
-38,Caja de regalo,1,100.0,1,4
-39,Bolsa de regalo,30,150.0,1,4
-40,Tinte plateado,20,30.0,2,4
-41,Coca cola,20,18.0,3,4
-42,Agua ciel,20,12.0,3,4
-43,Pepsi,20,18.0,3,4
-44,Jugo del valle,20,25.0,3,4
-=======
 1,Libreta,20,25,1,3
 2,Cartulina,30,10,1,3
 3,Lapiz,50,5,1,1
@@ -88,4 +42,3 @@
 42,Agua ciel,20,12,3,4
 43,Pepsi,20,18,3,4
 44,Jugo del valle,20,25,3,4
->>>>>>> 35e68c104efba5e606acb61d139cc5a2b55d4eaf
