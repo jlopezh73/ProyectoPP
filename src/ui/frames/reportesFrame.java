@@ -21,6 +21,8 @@ public class reportesFrame extends JFrame {
     private Font tipoTitulo21 = new Font("Arial", Font.PLAIN,18);
     private Font tipoTitulo3 = new Font("Arial", Font.PLAIN,16);
     ArrayList<Venta>  ventas;
+    private JLabel etiqueta1;
+    private JLabel etiqueta2;
     private JSpinner fechas;
     private JSpinner hasta;
     private JPanel panel1;
@@ -31,20 +33,33 @@ public class reportesFrame extends JFrame {
         setSize(800,500);
         setLayout(new FlowLayout());
         setTitle("Reporte de ventas");
+        etiqueta1=new JLabel("Fecha de inicio:");
+        etiqueta1.setFont(tipoTitulo2);
+        etiqueta1.setPreferredSize(new Dimension(150,30));
+        add(etiqueta1);
+
     Ventas g=new Ventas();
     fechas=new JSpinner(new SpinnerDateModel());
     fechas.setFont(tipoTitulo3);
-    fechas.setPreferredSize(new Dimension(300,30));
+    fechas.setPreferredSize(new Dimension(150,30));
     add(fechas);
 
         Date f12=(Date) fechas.getValue();
 
         f1=LocalDateTime.ofInstant(f12.toInstant(), ZoneId.systemDefault());
 
+        etiqueta2=new JLabel("Fecha de fin:");
+        etiqueta2.setFont(tipoTitulo2);
+        etiqueta2.setPreferredSize(new Dimension(120,30));
+        add(etiqueta2);
+
     hasta=new JSpinner(new SpinnerDateModel());
     hasta.setFont(tipoTitulo3);
-    hasta.setPreferredSize(new Dimension(300,30));
+    hasta.setPreferredSize(new Dimension(150,30));
     add(hasta);
+
+
+
     Date f13=(Date) hasta.getValue();
     f2=LocalDateTime.ofInstant(f13.toInstant(),ZoneId.systemDefault());
         fechas.addChangeListener(evt->{

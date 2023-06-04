@@ -45,7 +45,35 @@ public class Productos {
     }
 
 
+    public void eliminaProducto(int id){
+        ArrayList <Producto> todos=todosProductos();
+        try{
+            FileWriter mete=new FileWriter(archivo);
+            BufferedWriter met=new BufferedWriter(mete);
+            for(Producto ñ:todos){
+                if((Integer.parseInt(ñ.getID()))!=id){
+                    met.write(ñ.getID());
+                    met.write(",");
+                    met.write(ñ.getNombre());
+                    met.write(",");
+                    String aux=ñ.getPiezas()+"";
+                    met.write(aux);
+                    met.write(",");
+                    aux=ñ.getPrecio()+"";
+                    met.write(aux);
+                    met.write(",");
+                    met.write(ñ.getDepartamento());
+                    met.write(",");
+                    met.write(ñ.getApartado());
+                    met.write("\n");
+                }
+            }
+            met.close();
+        }
+        catch(Exception e){
 
+        }
+    }
     public  boolean validaProducto(Producto u){
         try{
             FileReader met=new FileReader(archivo);

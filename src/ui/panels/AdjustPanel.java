@@ -163,6 +163,7 @@ public class AdjustPanel extends JPanel {
                 if (JOptionPane.showConfirmDialog(null, "¿Está segur@ de eliminar el producto "+prod.getNombre()+"?", "Advertencia", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     var x = (DefaultTableModel)tableProducts.getModel();
                     x.removeRow(i);
+                    prods.eliminaProducto(Integer.parseInt(prod.getID()));
                 }
             }
         });
