@@ -152,6 +152,16 @@ public class AdjustPanel extends JPanel {
         delete.setOpaque(true);
         delete.setBorderPainted(false);
         delete.setPreferredSize(new Dimension(200, 30));
+        delete.addActionListener(evt -> {
+            int i = tableProducts.getSelectedRow();
+            if (i >= 0) {
+                Producto prod = listaProds.get(i);
+                loadProduct(prod);
+                if (JOptionPane.showConfirmDialog(null, "¿Está segur@ de eliminar el producto "+prod.getNombre()+"?", "Advertencia", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+
+                }
+            }
+        });
 
         buttonsPanel1 = new JPanel();
         buttonsPanel1.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
