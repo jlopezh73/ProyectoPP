@@ -1,10 +1,32 @@
 package Modelo;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 
 public class Usuarios {
     File archivo=new File("res/usuarios.csv");
     private int numUsuarios;
+    public ArrayList todosUsuarios(){
+        try {
+            FileReader saca = new FileReader(archivo);
+            BufferedReader sac=new BufferedReader(saca);
+            ArrayList<Usuario> lista=new ArrayList<>();
+            String w;
+            while((w=sac.readLine())!=null){
+                StringTokenizer y=new StringTokenizer(w,",");
+                String cara[]=new String[4];
+                for(int i=0;i<4;i++){
+                    cara[i]=y.nextToken();
+                }
+                Usuario u=new Usuario(cara[0],cara[1],cara[2],cara[3]);
+                lista.add(u);
+            }
+            return lista;
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
     public Usuarios(){
         numUsuarios=0;
         try{

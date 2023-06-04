@@ -7,6 +7,29 @@ import java.util.StringTokenizer;
 public class Productos {
     File archivo=new File("res/inventario.csv");
     private int numProductos;
+    public ArrayList todosProductos(){
+        ArrayList <Producto> lista=new ArrayList<>();
+        try {
+            FileReader saca = new FileReader(archivo);
+            BufferedReader sac=new BufferedReader(saca);
+            String w;
+            while((w=sac.readLine())!=null){
+                StringTokenizer y=new StringTokenizer(w,",");
+                String cad[]=new String[6];
+                for(int i=0;i<6;i++){
+                    cad[i]=y.nextToken();
+                }
+                int pie=Integer.parseInt(cad[2]);
+                double pre=Double.parseDouble(cad[3]);
+                Producto p=new Producto(cad[0],cad[1],pie,pre,cad[4],cad[5]);
+                lista.add(p);
+            }
+            return lista;
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
     public Productos(){
         try{
         FileReader saca=new FileReader(archivo);

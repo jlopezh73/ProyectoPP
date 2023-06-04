@@ -33,7 +33,23 @@ public class Producto {
         this.departamento = departamento;
         this.apartado = apartado;
     }
+    public String getDepa(){
+        if((Integer.parseInt(this.departamento))==1)
+            return "Papeleria";
+            else if(Integer.parseInt(this.departamento)==2)
+                return "Salud y belleza";
+            else
+                return "Dulces y bebidas";
 
+    }
+    public String getApa(){
+        String apartamntos[][]={
+                {"Escritura","Artes","Papeles","Regalos"},
+                {"Shampoo y jabones","desodorantes y perfumes","Cremas y faciales","Tintes y cabello"},
+                {"Chocolates","Dulces","Dulces salados","Bebidas"}
+        };
+        return apartamntos[Integer.parseInt(this.departamento)][Integer.parseInt(this.apartado)];
+    }
     public String getID() {
         return ID;
     }
