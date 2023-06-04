@@ -46,7 +46,7 @@ public class VentaFrame extends JFrame {
         setLayout(grid);
         setTitle("Datos de Venta");
 
-        setSize(850,350);
+        setSize(850,400);
         setResizable(false);
         ///setUndecorated(true);
         setLocationRelativeTo(null);

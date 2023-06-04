@@ -21,7 +21,7 @@ public class NewUserFrame extends JFrame {
 
     private JButton createUserBtn;
     private  JButton cancelButton;
-    private Font tipoLetra=new Font("Arial",Font.BOLD,20);
+    private Font tipoLetra=new Font("Arial",Font.BOLD,18);
     private Font tipoLetra2=new Font("Arial",Font.PLAIN,15);
     private Color colorGrisClaro = new Color(235,235, 235);
     public NewUserFrame(){
@@ -34,7 +34,7 @@ public class NewUserFrame extends JFrame {
         setLayout(grid);
         setTitle("Datos de Venta");
 
-        setSize(850,350);
+        setSize(850,250);
         setResizable(false);
         setUndecorated(true);
         setLocationRelativeTo(null);
@@ -44,6 +44,65 @@ public class NewUserFrame extends JFrame {
         bc = new GridBagConstraints();
         bc.gridx = 0;
         bc.gridy = 0;
+        bc.gridwidth = 1;
+        bc.gridheight = 1;
+        bc.weightx = 1;
+
+        loginlbl =new JLabel("Usuario: ");
+        loginlbl.setHorizontalAlignment(SwingConstants.RIGHT);
+        loginlbl.setPreferredSize(new Dimension(150,30));
+        loginlbl.setFont(tipoLetra);
+        add(loginlbl, bc);
+
+        bc = new GridBagConstraints();
+        bc.gridx = 1;
+        bc.gridy = 0;
+        bc.gridwidth = 2;
+        bc.gridheight = 1;
+        bc.weightx = 5.0;
+        bc.insets = new Insets(10,10,10,10);
+        bc.fill = GridBagConstraints.HORIZONTAL;
+
+        logintxt =new PHTextField();
+        logintxt.setPlaceholder("Password");
+        logintxt.setPreferredSize(new Dimension(200,30));
+        logintxt.setFont(tipoLetra2);
+        logintxt.setBackground(colorGrisClaro);
+        add(logintxt, bc);
+
+        bc = new GridBagConstraints();
+        bc.gridx = 3;
+        bc.gridy = 0;
+        bc.gridwidth = 1;
+        bc.gridheight = 1;
+        bc.weightx = 1.0;
+
+
+        passwordlbl =new JLabel("Contraseña: ");
+        passwordlbl.setHorizontalAlignment(SwingConstants.RIGHT);
+        passwordlbl.setPreferredSize(new Dimension(120,30));
+        passwordlbl.setFont(tipoLetra);
+        add(passwordlbl, bc);
+
+        bc = new GridBagConstraints();
+        bc.gridx = 4;
+        bc.gridy = 0;
+        bc.gridwidth = 3;
+        bc.gridheight = 1;
+        bc.weightx = 3.0;
+        bc.insets = new Insets(10,10,10,10);
+        bc.fill = GridBagConstraints.HORIZONTAL;
+
+        passwordtxt =new PHPasswordField();
+        passwordtxt.setFont(tipoLetra2);
+        passwordtxt.setPreferredSize(new Dimension(200,30));
+        passwordtxt.setPlaceholder("Password");
+        passwordtxt.setBackground(colorGrisClaro);
+        add(passwordtxt, bc);
+
+        bc = new GridBagConstraints();
+        bc.gridx = 0;
+        bc.gridy = 1;
         bc.gridwidth = 1;
         bc.gridheight = 1;
         bc.weightx = 1.0;
@@ -56,10 +115,10 @@ public class NewUserFrame extends JFrame {
 
         bc = new GridBagConstraints();
         bc.gridx = 1;
-        bc.gridy = 0;
-        bc.gridwidth = 5;
+        bc.gridy = 1;
+        bc.gridwidth = 6;
         bc.gridheight = 1;
-        bc.weightx = 5.0;
+        bc.weightx = 6.0;
         bc.insets = new Insets(10,10,10,10);
         bc.fill = GridBagConstraints.HORIZONTAL;
 
@@ -71,99 +130,21 @@ public class NewUserFrame extends JFrame {
         add(nametxt, bc);
 
 
-        bc = new GridBagConstraints();
-        bc.gridx = 0;
-        bc.gridy = 1;
-        bc.gridwidth = 1;
-        bc.gridheight = 1;
-        bc.weightx = 1;
-
-        loginlbl =new JLabel("Domicilio: ");
-        loginlbl.setHorizontalAlignment(SwingConstants.RIGHT);
-        loginlbl.setPreferredSize(new Dimension(150,30));
-        loginlbl.setFont(tipoLetra);
-        add(loginlbl, bc);
-
-        bc = new GridBagConstraints();
-        bc.gridx = 1;
-        bc.gridy = 1;
-        bc.gridwidth = 5;
-        bc.gridheight = 1;
-        bc.weightx = 5.0;
-        bc.insets = new Insets(10,10,10,10);
-        bc.fill = GridBagConstraints.HORIZONTAL;
-
-        logintxt =new PHTextField();
-        logintxt.setPlaceholder("Domicilio");
-        logintxt.setPreferredSize(new Dimension(200,30));
-        logintxt.setFont(tipoLetra2);
-        logintxt.setBackground(colorGrisClaro);
-        add(logintxt, bc);
-
-        bc = new GridBagConstraints();
-        bc.gridx = 0;
-        bc.gridy = 2;
-        bc.gridwidth = 1;
-        bc.gridheight = 1;
-        bc.weightx = 1.0;
 
 
-        passwordlbl =new JLabel("Ciudad: ");
-        passwordlbl.setHorizontalAlignment(SwingConstants.RIGHT);
-        passwordlbl.setPreferredSize(new Dimension(100,30));
-        passwordlbl.setFont(tipoLetra);
-        add(passwordlbl, bc);
 
         bc = new GridBagConstraints();
         bc.gridx = 3;
-        bc.gridy = 2;
-        bc.gridwidth = 3;
-        bc.gridheight = 1;
-        bc.weightx = 3.0;
-        bc.insets = new Insets(10,10,10,10);
-        bc.fill = GridBagConstraints.HORIZONTAL;
-
-        passwordtxt =new PHPasswordField();
-        passwordtxt.setFont(tipoLetra2);
-        passwordtxt.setPreferredSize(new Dimension(200,30));
-        passwordtxt.setPlaceholder("Ciudad");
-        passwordtxt.setBackground(colorGrisClaro);
-        add(passwordtxt, bc);
-
-
-        bc = new GridBagConstraints();
-        bc.gridx = 5;
         bc.gridy = 5;
-        bc.gridwidth = 1;
+        bc.gridwidth = 2;
         bc.gridheight = 1;
         bc.weightx = 0;
         bc.insets = new Insets(10,10,10,10);
         //bc.fill = GridBagConstraints.HORIZONTAL;
 
-        createUserBtn =new JButton("Pagar");
+        createUserBtn=new JButton("Nuevo usuario");
         createUserBtn.setFont(tipoLetra);
-        createUserBtn.setPreferredSize(new Dimension(110,30));
-        createUserBtn.setForeground(Color.white);
-        createUserBtn.setBackground(new Color(10,100,10));
-        add(createUserBtn, bc);
-
-        cancelButton=new JButton("Cancelar");
-        cancelButton.setPreferredSize(new Dimension(80,30));
-        cancelButton.setFont(tipoLetra);
-        cancelButton.setForeground(Color.WHITE);
-        cancelButton.setBackground(new Color(140,10,10));
-        add(cancelButton, bc);
-
-        cancelButton.addActionListener(evt->{
-            nametxt.setText("");
-            logintxt.setText("");
-            passwordtxt.setText("");
-            this.dispose();
-        });
-
-        createUserBtn=new JButton("Agregar usuario");
-        createUserBtn.setFont(tipoLetra);
-        createUserBtn.setPreferredSize(new Dimension(110,30));
+        createUserBtn.setPreferredSize(new Dimension(170,30));
         createUserBtn.setForeground(Color.white);
         createUserBtn.setBackground(new Color(10,100,10));
         add(createUserBtn, bc);
@@ -180,6 +161,29 @@ public class NewUserFrame extends JFrame {
                 this.dispose();
             }
         });
+
+        bc = new GridBagConstraints();
+        bc.gridx = 5;
+        bc.gridy = 5;
+        bc.gridwidth = 2;
+        bc.gridheight = 1;
+        bc.weightx = 0;
+        bc.insets = new Insets(10,10,10,10);
+
+        cancelButton=new JButton("Cancelar");
+        cancelButton.setPreferredSize(new Dimension(120,30));
+        cancelButton.setFont(tipoLetra);
+        cancelButton.setForeground(Color.WHITE);
+        cancelButton.setBackground(new Color(140,10,10));
+        add(cancelButton, bc);
+
+        cancelButton.addActionListener(evt->{
+            nametxt.setText("");
+            logintxt.setText("");
+            passwordtxt.setText("");
+            this.dispose();
+        });
+
     }
 
     private boolean validarDatos() {
