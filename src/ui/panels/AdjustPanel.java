@@ -6,6 +6,7 @@ import Modelo.Productos;
 import ui.components.PHTextField;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -101,11 +102,13 @@ public class AdjustPanel extends JPanel {
         productsPanel.setPreferredSize(new Dimension(1000,500));
         productsPanel.setLayout(new BorderLayout());
 
-        tableProducts = new JTable(data, columnNames) {
+        tableProducts = new JTable() {
             public boolean isCellEditable(int row, int column) {
                 return false;
             };
         };
+        tableProducts.setModel(new DefaultTableModel(data, columnNames));
+
         tableProducts.getColumnModel().getColumn(0).setMaxWidth(50);
         tableProducts.getColumnModel().getColumn(1).setPreferredWidth(100);
         tableProducts.getColumnModel().getColumn(2).setPreferredWidth(100);
@@ -158,7 +161,8 @@ public class AdjustPanel extends JPanel {
                 Producto prod = listaProds.get(i);
                 loadProduct(prod);
                 if (JOptionPane.showConfirmDialog(null, "¿Está segur@ de eliminar el producto "+prod.getNombre()+"?", "Advertencia", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-
+                    var x = (DefaultTableModel)tableProducts.getModel();
+                    x.removeRow(i);
                 }
             }
         });
