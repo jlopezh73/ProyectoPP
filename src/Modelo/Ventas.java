@@ -17,7 +17,35 @@ public class Ventas {
     public Ventas(){
 
     }
+    public ArrayList encuentraFechas(LocalDateTime d1,LocalDateTime d2){
+        try {
+            FileReader saca = new FileReader(arc2);
+            BufferedReader sac=new BufferedReader(saca);
+            String aux;
+            ArrayList <Venta> listaaux=new ArrayList<>();
+            while ((aux=sac.readLine())!=null){
+                StringTokenizer auxi=new StringTokenizer(aux,",");
+                String venta=auxi.nextToken();
+                String total=auxi.nextToken();
+                String fecha=auxi.nextToken();
+                int numventa=Integer.parseInt(venta);
+                double todo=Double.parseDouble(total);
+                LocalDateTime tiempo=LocalDateTime.parse(fecha);
+                int dia,mes,anio;
+                int dia1,mes1,anio1;
+                int dia2,mes2,anio2;
 
+                if(tiempo.isAfter(d1)&&tiempo.isBefore(d2)){
+                    Venta g=new Venta(numventa,tiempo,todo);
+                    listaaux.add(g);
+                }
+            }
+            return listaaux;
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
     public void registrarVenta(Venta venta){
         try{
             venta.setNumVenta(obtenerNoVenta());

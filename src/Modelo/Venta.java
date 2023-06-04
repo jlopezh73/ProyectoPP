@@ -13,6 +13,7 @@ public class Venta {
     private String estado;
     private String correoElectronico;
     private String telefono;
+    private double total;
     private LocalDateTime fecha;
     private List<ProductoCarrito> productos;
 
@@ -59,6 +60,12 @@ public class Venta {
 
     public String getColonia() {
         return colonia;
+    }
+
+    public Venta(int numVenta, LocalDateTime fecha,double total) {
+        this.numVenta = numVenta;
+        this.fecha=fecha;
+        this.total=total;
     }
 
     public void setColonia(String colonia) {

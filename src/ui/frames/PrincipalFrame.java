@@ -34,7 +34,7 @@ public class PrincipalFrame extends JFrame {
 
     private JButton salesReportButton;
     private JButton inventoryReportButton;
-
+    private reportesFrame rf;
     private Color colorAmarillo = new Color(255,212,1);
     private Font tipoTitulo1 = new Font("Arial", Font.BOLD,40);
     private Font tipoTitulo2 = new Font("Arial", Font.BOLD,18);
@@ -86,7 +86,8 @@ public class PrincipalFrame extends JFrame {
         salesReportButton.setHorizontalTextPosition(SwingConstants.CENTER);
         salesReportButton.setBorderPainted(false);
         salesReportButton.addActionListener(evt ->  {
-
+            rf=new reportesFrame();
+            rf.setVisible(true);
         });
 
         inventoryReportButton = new JButton("Reporte de Inventarios");

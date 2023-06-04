@@ -24,7 +24,7 @@ public class ShoppingCartProductPanel extends JPanel {
         setLayout(new FlowLayout());
         setBorder(BorderFactory.createDashedBorder(Color.darkGray));
         setBackground(Color.white);
-        setPreferredSize(new Dimension(270,180));
+        setPreferredSize(new Dimension(270,300));
         Producto j=pc.getProductoOriginal();
         nombre=new JLabel(j.getNombre());
         nombre.setPreferredSize(new Dimension(250,25));
@@ -32,11 +32,11 @@ public class ShoppingCartProductPanel extends JPanel {
         nombre.setAlignmentX(CENTER_ALIGNMENT);
         add(nombre);
 
-        ImageIcon imageIcon = new ImageIcon("res/"+"/"+j.getNombre()+".jpg");
+        ImageIcon imageIcon = new ImageIcon("res/fotos/"+j.getID()+".jpg");
         Image image = imageIcon.getImage();
         double ancho = image.getWidth(null);
         double alto = image.getHeight(null);
-        Image newimg = image.getScaledInstance(180, 180,  java.awt.Image.SCALE_SMOOTH);
+        Image newimg = image.getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH);
 
         imagen=new JLabel();
         imagen.setIcon(new ImageIcon(newimg));
