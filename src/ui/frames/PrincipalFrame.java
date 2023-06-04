@@ -26,6 +26,7 @@ public class PrincipalFrame extends JFrame {
     private JPanel ajustsPanel;
     private ShopCartPanel shopCartPanel;
     private JLabel logo;
+    private InventarioFrame ifm;
     private JButton bShopping;
     private JButton bReports;
     private JButton bAdjusts;
@@ -101,7 +102,8 @@ public class PrincipalFrame extends JFrame {
         inventoryReportButton.setHorizontalTextPosition(SwingConstants.CENTER);
         inventoryReportButton.setBorderPainted(false);
         inventoryReportButton.addActionListener(evt ->  {
-
+            ifm=new InventarioFrame();
+            ifm.setVisible(true);
         });
 
         reportsPanel.add(salesReportButton);
