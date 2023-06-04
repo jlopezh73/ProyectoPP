@@ -62,7 +62,15 @@ public class Venta {
         return colonia;
     }
 
-    public Venta(int numVenta, LocalDateTime fecha,double total) {
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public Venta(int numVenta, LocalDateTime fecha, double total) {
         this.numVenta = numVenta;
         this.fecha=fecha;
         this.total=total;
