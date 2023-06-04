@@ -21,6 +21,7 @@ public class reportesFrame extends JFrame {
     LocalDateTime f2;
     public reportesFrame(){
         setSize(800,500);
+        setLayout(new FlowLayout());
     Ventas g=new Ventas();
     fechas=new JSpinner(new SpinnerDateModel());
     fechas.setPreferredSize(new Dimension(300,20));

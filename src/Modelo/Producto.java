@@ -48,7 +48,7 @@ public class Producto {
                 {"Shampoo y jabones","desodorantes y perfumes","Cremas y faciales","Tintes y cabello"},
                 {"Chocolates","Dulces","Dulces salados","Bebidas"}
         };
-        return apartamntos[Integer.parseInt(this.departamento)][Integer.parseInt(this.apartado)];
+        return apartamntos[Integer.parseInt(this.departamento)-1][Integer.parseInt(this.apartado)-1];
     }
     public String getID() {
         return ID;
