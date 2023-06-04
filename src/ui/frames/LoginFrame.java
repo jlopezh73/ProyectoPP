@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.font.TextAttribute;
+import java.util.Map;
 
 public class LoginFrame extends JFrame {
     private JPanel logoPanel;
@@ -14,7 +16,10 @@ public class LoginFrame extends JFrame {
     private JLabel logo;
     private JLabel title;
     private JLabel subtitle;
+    private JLabel lblUsername;
+    private JLabel lblPassword;
     private JButton button;
+    private JButton registerUser;
     private PHTextField userName;
     private PHPasswordField password;
     private final Color colorAmarillo = new Color(255,212,1);
@@ -23,6 +28,7 @@ public class LoginFrame extends JFrame {
     private final Font tipoTitulo2 = new Font("Arial", Font.BOLD,25);
     private final Font tipoTitulo3 = new Font("Arial", Font.BOLD,20);
     private final Font tipoTitulo4=new Font("Arial",Font.ITALIC,20);
+    private final Font tipoTitulo5=new Font("Arial",Font.PLAIN,14);
 
     public LoginFrame() {
         initComponents();
@@ -53,7 +59,7 @@ public class LoginFrame extends JFrame {
 
         title = new JLabel("Bienvenido");
         title.setFont(tipoTitulo2);
-        title.setPreferredSize(new Dimension(380, 200));
+        title.setPreferredSize(new Dimension(380, 120));
         title.setVerticalAlignment(JLabel.BOTTOM);
         loginPanel.add(title);
 
@@ -67,6 +73,12 @@ public class LoginFrame extends JFrame {
         empty0.setPreferredSize(new Dimension(380, 20));
         loginPanel.add(empty0);
 
+        lblUsername = new JLabel("Usuario");
+        lblUsername.setFont(tipoTitulo5);
+        lblUsername.setPreferredSize(new Dimension(380, 30));
+        lblUsername.setAlignmentX(Component.LEFT_ALIGNMENT);
+        loginPanel.add(lblUsername);
+
         userName = new PHTextField();
         userName.setPreferredSize(new Dimension(380, 40));
         userName.setFont(new Font("Arial", Font.PLAIN, 14));
@@ -77,6 +89,12 @@ public class LoginFrame extends JFrame {
         JPanel empty1 = new JPanel();
         empty1.setPreferredSize(new Dimension(400, 30));
         loginPanel.add(empty1);
+
+        lblPassword = new JLabel("Contraseña");
+        lblPassword.setFont(tipoTitulo5);
+        lblPassword.setPreferredSize(new Dimension(380, 30));
+        lblPassword.setAlignmentX(Component.LEFT_ALIGNMENT);
+        loginPanel.add(lblPassword);
 
         password = new PHPasswordField();
         password.setPreferredSize(new Dimension(380, 40));
@@ -95,10 +113,33 @@ public class LoginFrame extends JFrame {
         button.setOpaque(true);
         button.setBorderPainted(false);
         button.setFont(tipoTitulo3);
+        button.setDefaultCapable(true);
         loginPanel.add(button);
+        getRootPane().setDefaultButton(button);
+
+        JPanel empty4 = new JPanel();
+        empty4.setPreferredSize(new Dimension(400, 20));
+        loginPanel.add(empty4);
+
+        registerUser = new JButton("Registrar nuevo usuario");
+        registerUser.setPreferredSize(new Dimension(300, 50));
+        registerUser.setBackground(new Color(240,240,240));
+        registerUser.setOpaque(true);
+        registerUser.setBorderPainted(false);
+        registerUser.setFont(tipoTitulo5);
+        registerUser.setForeground(Color.BLUE);
+        registerUser.addActionListener(evt -> {
+            NewUserFrame newUserFrame = new NewUserFrame();
+            newUserFrame.setVisible(true);
+        });
+        loginPanel.add(registerUser);
+
+        Map attributes = registerUser.getFont().getAttributes();
+        attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        registerUser.setFont(registerUser.getFont().deriveFont(attributes));
 
         JPanel empty5 = new JPanel();
-        empty5.setPreferredSize(new Dimension(380, 20));
+        empty5.setPreferredSize(new Dimension(380, 10));
         loginPanel.add(empty5);
 
         error=new JLabel();
