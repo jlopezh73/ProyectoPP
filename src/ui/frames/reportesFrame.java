@@ -69,7 +69,7 @@ public class reportesFrame extends JFrame {
         tabla=new JTable(filas,nombres);
 
         tabla.setPreferredSize(new Dimension(750,600));
-        panel1.add(tabla,BorderLayout.CENTER);
+        panel1.add(new JScrollPane(tabla),BorderLayout.CENTER);
         panel1.updateUI();
     }
     public void construyeTabla(LocalDateTime d1,LocalDateTime d2){
@@ -83,11 +83,12 @@ public class reportesFrame extends JFrame {
             filas[i][0]=v.getNumVenta();
             filas[i][1]=v.getFecha();
             filas[i][2]=v.getTotal();
+            i++;
         }
-        panel1.remove(tabla);
-        tabla.removeAll();
+        panel1.removeAll();
         tabla=new JTable(filas,nombres);
-        panel1.add(tabla,BorderLayout.CENTER);
+
+        panel1.add(new JScrollPane(tabla),BorderLayout.CENTER);
         panel1.updateUI();
 
     }

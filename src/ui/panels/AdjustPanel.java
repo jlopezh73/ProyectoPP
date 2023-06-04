@@ -3,6 +3,7 @@ package ui.panels;
 import Modelo.Producto;
 import Modelo.ProductoCarrito;
 import Modelo.Productos;
+import ui.components.PHTextField;
 
 import javax.swing.*;
 import javax.swing.table.TableColumn;
@@ -19,14 +20,23 @@ public class AdjustPanel extends JPanel {
     private Color colorAmarillo = new Color(255,212,1);
     private Font tipoTitulo1 = new Font("Arial", Font.BOLD,40);
     private Font tipoTitulo2 = new Font("Arial", Font.BOLD,18);
+    private Font tipoTitulo21 = new Font("Arial", Font.PLAIN,18);
     private Font tipoTitulo3 = new Font("Arial", Font.PLAIN,16);
     private JTable tableProducts;
     private JTable tableUsers;
     private JButton saveProducts;
     private JButton saveUsers;
+    private JPanel editProductPanel;
     private JPanel buttonsPanel1;
-    private Productos prods ;
+    private JPanel editUserPanel;
+    private JPanel buttonsPanel2;
+    private Productos prods;
     private List<Producto> listaProds;
+    private PHTextField txtName;
+    private JComboBox cbDepartment;
+    private JComboBox cbApartment;
+    private JSpinner spPrice;
+    private JSpinner spQuantity;
 
     public AdjustPanel() {
         initComponents();
@@ -56,8 +66,6 @@ public class AdjustPanel extends JPanel {
         label2.setHorizontalAlignment(SwingConstants.CENTER);
         tabs.setTabComponentAt(0, label1);
         tabs.setTabComponentAt(1, label2);
-        
-
 
         add(tabs, BorderLayout.CENTER);
     }
@@ -112,7 +120,7 @@ public class AdjustPanel extends JPanel {
         tableProducts.setEditingColumn(2);
 
 
-        productsPanel.add(tableProducts.getTableHeader(), BorderLayout.PAGE_START);
+
         productsPanel.add(new JScrollPane(tableProducts), BorderLayout.CENTER);
 
         JButton edit = new JButton("Modificar Producto");
@@ -121,6 +129,18 @@ public class AdjustPanel extends JPanel {
         edit.setOpaque(true);
         edit.setBorderPainted(false);
         edit.setPreferredSize(new Dimension(200, 30));
+        edit.addActionListener(evt -> {
+            int i = tableProducts.getSelectedRow();
+            if (i >= 0) {
+                Producto prod = listaProds.get(i);
+                loadProduct();
+
+                productsPanel.remove(buttonsPanel1);
+                buttonsPanel1.updateUI();
+                productsPanel.add(editProductPanel, BorderLayout.SOUTH);
+                editProductPanel.updateUI();
+            }
+        });
 
         JButton delete = new JButton("Eliminar Producto");
         delete.setBackground(Color.red);
@@ -135,7 +155,75 @@ public class AdjustPanel extends JPanel {
         buttonsPanel1.add(edit);
         buttonsPanel1.add(delete);
 
+        editProductPanel = new JPanel();
+        editProductPanel.setLayout(new FlowLayout());
+        editProductPanel.setBorder(BorderFactory.createTitledBorder("Edición de Producto"));
+        editProductPanel.setPreferredSize(new Dimension(1050,200));
+        editProductPanel.setBackground(colorAmarillo);
+
+        JLabel lblName = new JLabel("Nombre");
+        lblName.setFont(tipoTitulo2);
+        lblName.setPreferredSize(new Dimension(130,30));
+
+        JLabel lblDepartment = new JLabel("Departamento");
+        lblDepartment.setFont(tipoTitulo2);
+        lblDepartment.setPreferredSize(new Dimension(130,30));
+
+        JLabel lblApartment = new JLabel("Apartamento");
+        lblApartment.setFont(tipoTitulo2);
+        lblApartment.setPreferredSize(new Dimension(130,30));
+
+        JLabel lblQuantity = new JLabel("Existencia");
+        lblQuantity.setFont(tipoTitulo2);
+        lblQuantity.setPreferredSize(new Dimension(130,30));
+
+        JLabel lblPrice = new JLabel("Precio");
+        lblPrice.setFont(tipoTitulo2);
+        lblPrice.setPreferredSize(new Dimension(130,30));
+
+        txtName = new PHTextField();
+        txtName.setFont(tipoTitulo21);
+        txtName.setPreferredSize(new Dimension(850,30));
+        txtName.setPlaceholder("Nombre del Producto");
+
+        cbDepartment = new JComboBox();
+        cbDepartment.setFont(tipoTitulo21);
+        cbDepartment.setPreferredSize(new Dimension(350,30));
+
+        cbApartment = new JComboBox();
+        cbApartment.setFont(tipoTitulo21);
+        cbApartment.setPreferredSize(new Dimension(350,30));
+        cbDepartment.addItem("Papelería");
+        cbDepartment.addItem("Salud y Belleza");
+        cbDepartment.addItem("Dulcería");
+
+        spPrice = new JSpinner();
+        spPrice.setFont(tipoTitulo21);
+        spPrice.setPreferredSize(new Dimension(350,30));
+
+        spQuantity = new JSpinner();
+        spQuantity.setFont(tipoTitulo21);
+        spQuantity.setPreferredSize(new Dimension(350,30));
+
+        JButton accept = new JButton("Aceptar");
+        JButton cancel = new JButton("Cancelar");
+
+        editProductPanel.add(lblName);
+        editProductPanel.add(txtName);
+        editProductPanel.add(lblDepartment);
+        editProductPanel.add(cbDepartment);
+        editProductPanel.add(lblApartment);
+        editProductPanel.add(cbApartment);
+        editProductPanel.add(lblPrice);
+        editProductPanel.add(spPrice);
+        editProductPanel.add(lblQuantity);
+        editProductPanel.add(spQuantity);
+
+
         productsPanel.add(buttonsPanel1, BorderLayout.SOUTH);
+    }
+
+    private void loadProduct() {
     }
 
     private void createUsersPanel() {
