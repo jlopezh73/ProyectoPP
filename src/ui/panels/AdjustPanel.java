@@ -14,7 +14,10 @@ import java.util.List;
 
 public class AdjustPanel extends JPanel {
     private JTabbedPane tabs;
+    private PHTextField cbDepartment2;
     private JPanel productsPanel;
+    private PHTextField cbApartment2;
+    private PHTextField txtName2;
     private JPanel usersPanel;
     private Color colorAmarillo = new Color(255,212,1);
     private Font tipoTitulo1 = new Font("Arial", Font.BOLD,40);
@@ -311,6 +314,13 @@ public class AdjustPanel extends JPanel {
             spQuantity.setValue(prod.getPiezas());
         }
     }
+    private void loadUsuario(Usuario u){
+        if(u!=null){
+            txtName2.setText(u.getNombre());
+            cbDepartment2.setText(u.getNombreCompleto());
+            cbApartment2.setText(u.getContraseña());
+        }
+    }
 
     private void createUsersPanel() {
         String[] columnNames = {"Usuario",
@@ -333,11 +343,12 @@ public class AdjustPanel extends JPanel {
         usersPanel.setPreferredSize(new Dimension(1000,500));
         usersPanel.setLayout(new BorderLayout());
 
-        tableUsers = new JTable(data, columnNames) {
+        tableUsers = new JTable() {
             public boolean isCellEditable(int row, int column) {
                 return false;
             };
         };
+        tableUsers.setModel(new DefaultTableModel(data, columnNames));
         tableUsers.setBorder(BorderFactory.createEtchedBorder());
         tableUsers.setFont(tipoTitulo3);
         tableUsers.setRowHeight(30);
@@ -351,5 +362,142 @@ public class AdjustPanel extends JPanel {
 
         usersPanel.add(tableUsers.getTableHeader(), BorderLayout.PAGE_START);
         usersPanel.add(tableUsers, BorderLayout.CENTER);
+
+        JButton edit2 = new JButton("Modificar usuario");
+        edit2.setBackground(Color.blue);
+        edit2.setForeground(Color.white);
+        edit2.setOpaque(true);
+        edit2.setBorderPainted(false);
+        edit2.setPreferredSize(new Dimension(200, 30));
+        edit2.addActionListener(evt -> {
+            int i = tableUsers.getSelectedRow();
+            if (i >= 0) {
+                tableUsers.setEnabled(false);
+                Usuarios d=new Usuarios();
+                ArrayList <Usuario> listaUsers=d.todosUsuarios();
+                Usuario user=listaUsers.get(i);
+                loadUsuario(user);
+
+                usersPanel.remove(buttonsPanel2);
+                buttonsPanel2.updateUI();
+                usersPanel.add(editUserPanel, BorderLayout.SOUTH);
+                editUserPanel.updateUI();
+            }
+        });
+
+        JButton delete2 = new JButton("Eliminar Usuario");
+        delete2.setBackground(Color.red);
+        delete2.setForeground(Color.white);
+        delete2.setOpaque(true);
+        delete2.setBorderPainted(false);
+        delete2.setPreferredSize(new Dimension(200, 30));
+        delete2.addActionListener(evt -> {
+            int i = tableUsers.getSelectedRow();
+            if (i >= 0) {
+                Usuarios op=new Usuarios();
+                ArrayList<Usuario> listar=op.todosUsuarios();
+                Usuario user=listar.get(i);
+                loadUsuario(user);
+                if (JOptionPane.showConfirmDialog(null, "¿Está segur@ de eliminar el usuario "+user.getNombre()+"?", "Advertencia", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                    var x = (DefaultTableModel)tableUsers.getModel();
+                    x.removeRow(i);
+
+                    op.eliminaUsuario(Integer.parseInt(user.getID()));
+                }
+            }
+        });
+
+        buttonsPanel2 = new JPanel();
+        buttonsPanel2.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        buttonsPanel2.setLayout(new FlowLayout());
+        buttonsPanel2.add(edit2);
+        buttonsPanel2.add(delete2);
+
+        editUserPanel = new JPanel();
+        editUserPanel.setLayout(new FlowLayout());
+        editUserPanel.setBorder(BorderFactory.createTitledBorder("Edición de Usuario"));
+        editUserPanel.setPreferredSize(new Dimension(1050,170));
+        editUserPanel.setBackground(colorAmarillo);
+
+        JLabel lblName2 = new JLabel("Nombre de usuario:");
+        lblName2.setFont(tipoTitulo2);
+        lblName2.setPreferredSize(new Dimension(130,30));
+
+        JLabel lblDepartment2 = new JLabel("Contraseña:");
+        lblDepartment2.setFont(tipoTitulo2);
+        lblDepartment2.setPreferredSize(new Dimension(130,30));
+
+        JLabel lblApartment2 = new JLabel("Nombre completo:");
+        lblApartment2.setFont(tipoTitulo2);
+        lblApartment2.setPreferredSize(new Dimension(130,30));
+
+        txtName2 = new PHTextField();
+        txtName2.setFont(tipoTitulo21);
+        txtName2.setPreferredSize(new Dimension(850,30));
+
+        cbDepartment2 = new PHTextField();
+        cbDepartment2.setFont(tipoTitulo21);
+        cbDepartment2.setPreferredSize(new Dimension(350,30));
+
+        cbApartment2 = new PHTextField();
+        cbApartment2.setFont(tipoTitulo21);
+        cbApartment2.setPreferredSize(new Dimension(350,30));
+
+        JButton accept2 = new JButton("Aceptar");
+        accept2.setBackground(Color.black);
+        accept2.setForeground(Color.white);
+        accept2.setOpaque(true);
+        accept2.setBorderPainted(false);
+        accept2.setPreferredSize(new Dimension(200, 30));
+        accept2.addActionListener(evt-> {
+            int row = tableUsers.getSelectedRow();
+            tableUsers.getModel().setValueAt(txtName2.getText(), row, 0);
+            tableUsers.getModel().setValueAt(cbDepartment2.getText(), row, 1);
+            tableUsers.getModel().setValueAt(cbApartment2.getText(), row, 2);
+
+            Usuarios io=new Usuarios();
+            ArrayList <Usuario> list=io.todosUsuarios();
+            Usuario anterior = list.get(row);
+            Usuario nuevo = new Usuario(txtName2.getText(), cbDepartment2.getText(),cbApartment2.getText(),anterior.getID());
+
+            io.modificarusuario(anterior,nuevo);
+
+            usersPanel.remove(editUserPanel);
+            buttonsPanel2.updateUI();
+            usersPanel.add(buttonsPanel2, BorderLayout.SOUTH);
+            buttonsPanel2.updateUI();
+
+            tableUsers.setEnabled(true);
+        });
+
+        JButton cancel2 = new JButton("Cancelar");
+        cancel2.setForeground(Color.black);
+        cancel2.setBackground(Color.white);
+        cancel2.setOpaque(true);
+        cancel2.setBorderPainted(false);
+        cancel2.setPreferredSize(new Dimension(200, 30));
+        cancel2.addActionListener(evt-> {
+            usersPanel.remove(editUserPanel);
+            buttonsPanel2.updateUI();
+            usersPanel.add(buttonsPanel2, BorderLayout.SOUTH);
+            buttonsPanel2.updateUI();
+            usersPanel.setEnabled(true);
+        });
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new FlowLayout());
+        panel.setBackground(null);
+        panel.add(accept2);
+        panel.add(cancel2);
+
+        editUserPanel.add(lblName2);
+        editUserPanel.add(txtName2);
+        editUserPanel.add(lblDepartment2);
+        editUserPanel.add(cbDepartment2);
+        editUserPanel.add(lblApartment2);
+        editUserPanel.add(cbApartment2);
+        editUserPanel.add(panel);
+
+        usersPanel.add(buttonsPanel2, BorderLayout.SOUTH);
     }
 }

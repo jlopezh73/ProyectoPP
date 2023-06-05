@@ -27,6 +27,31 @@ public class Usuarios {
             return null;
         }
     }
+    public void eliminaUsuario(int id){
+        try {
+            ArrayList<Usuario> lista=todosUsuarios();
+            FileWriter sac = new FileWriter(archivo);
+            BufferedWriter saca=new BufferedWriter(sac);
+            for(Usuario ui:lista){
+                if((Integer.parseInt(ui.getID()))!=id){
+                    saca.write(ui.getNombre());
+                    saca.write(",");
+                    saca.write(ui.getContraseña());
+                    saca.write(",");
+                    saca.write(ui.getNombreCompleto());
+                    saca.write(",");
+                    String auxi=ui.getID()+"";
+                    saca.write(auxi);
+                    saca.write("\n");
+                }
+            }
+            saca.close();
+
+        }
+        catch (Exception e){
+
+        }
+    }
     public Usuarios(){
         numUsuarios=0;
         try{
@@ -87,6 +112,7 @@ public class Usuarios {
                 }
                 num++;
             }
+            num++;
             mete.close();
             if (bandera == false) {
                 try {
@@ -143,6 +169,10 @@ public class Usuarios {
                 met.write(usuarios[i].getNombre());
                 met.write(",");
                 met.write(usuarios[i].getContraseña());
+                met.write(",");
+                met.write(usuarios[i].getNombreCompleto());
+                met.write(",");
+                met.write(usuarios[i].getID());
                 met.write("\n");
             }
             met.close();
