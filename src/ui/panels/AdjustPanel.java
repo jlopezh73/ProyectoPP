@@ -458,7 +458,7 @@ public class AdjustPanel extends JPanel {
             Usuarios io=new Usuarios();
             ArrayList <Usuario> list=io.todosUsuarios();
             Usuario anterior = list.get(row);
-            Usuario nuevo = new Usuario(txtName2.getText(), cbDepartment2.getText(),cbApartment2.getText(),anterior.getID());
+            Usuario nuevo = new Usuario(txtName2.getText(), cbApartment2.getText(),cbDepartment2.getText(),anterior.getID());
 
             io.modificarusuario(anterior,nuevo);
 
